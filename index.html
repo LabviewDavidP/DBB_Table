@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Website Title</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+
+	<h1>Main Info</h1>
+
+	<ol>
+<!--	<li><a href="MethodCall?MethodName=Login">Login</a></li> -->
+		
+		<li><fieldset><form				action="logs/traffic.html/"	method="get">
+			<input type="submit"									value="Traffic"/>
+		</form></fieldset></li>
+
+		<li><fieldset><form				action="Tabelle_U10.html"	method="get">
+			<input type="submit"									value="Tabelle U10 HTML"/>
+		</form></fieldset></li>
+
+		<li><fieldset><form				action="Tabelle_U12.html"	method="get">
+			<input type="submit"									value="Tabelle U12 HTML"/>
+		</form></fieldset></li>
+
+		<li><fieldset><form				action="Tabelle_H3.html"	method="get">
+			<input type="submit"									value="Tabelle H3 HTML"/>
+		</form></fieldset></li>
+
+		<li><fieldset><form				action="/wsb5901844801/"	method="get">
+			<input type="hidden"		name="Argument"				value="TestValue"/>
+			<input type="submit"									value="Website"/>
+		</form></fieldset></li>
+
+		<li><fieldset><form				action="MethodCall"		method="get">
+			<input type="hidden"		name="MethodName"		value="Start"/>
+				Start<br>
+				u59018448:
+			<input type="text"			name="ChannelSelection"	value="Arguments"/><br>
+			<input type="submit"								value="Start"/>
+		</form></fieldset></li>
+
+		<li><fieldset><form				action="MethodCall"		method="get">
+			<input type="hidden"		name="MethodName"		value="StartRecord"/>
+				Record<br>
+				Record Length:
+			<input type="text"			name="RecordLength"		value="10"/>
+				[s]<br>
+				Pretrigger Length:
+			<input type="text"			name="PretriggerLength"	value="0"/>
+				[s] (Must be less than the "Record Length" and less or equal then 20 s.)<br>
+			<input type="submit"								value="Start Record"/>
+		</form></fieldset></li>
+		
+
+	</ol>
+
+</body>
+
+</html>
