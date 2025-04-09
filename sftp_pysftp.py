@@ -137,3 +137,5 @@ if __name__ == "__main__":
 
     # Disconnect from SFTP
     sftp.disconnect()
+
+    print(f"Everything updated on: {parsed_url.hostname}")
