@@ -18,7 +18,7 @@ def read_table(url, table_file, html_file):
     #   Spieltag    Spielnummer  Datum              Heimmannschaft              Gastmannschaft      Endstand
     #   559         12           09.03.2025 18:00   ESV Flügelrad Nürnberg 2    TV 1861 Hersbruck   52:73
 
-    # Remove last row
+    # Remove the last row
     row_len = df_Ergebnisse.__len__() - 1
     df_drop_row = df_Ergebnisse.drop([row_len])
 
@@ -34,7 +34,7 @@ def read_table(url, table_file, html_file):
     # Capture teams
     teams = set(df["Heimmannschaft"]).union(set(df["Gastmannschaft"]))
 
-    # Create points table
+    # Create the point table
     table = {team: {"Games": 0, "Wins": 0, "Losses": 0, "Points": 0, "Points Made": 0, "Points Get": 0, "Diff": 0}
              for team in teams}
 
