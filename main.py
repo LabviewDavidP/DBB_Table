@@ -13,14 +13,14 @@ def read_table(url, table_file, html_file):
     table_xls = pd.ExcelFile(table_file)
 
     # Load data from the "Ergebnisse" sheet
-    df_Ergebnisse = pd.read_excel(table_xls, sheet_name="Ergebnisse", header=1)
+    df_ergebnisse = pd.read_excel(table_xls, sheet_name="Ergebnisse", header=1)
 
     #   Spieltag    Spielnummer  Datum              Heimmannschaft              Gastmannschaft      Endstand
     #   559         12           09.03.2025 18:00   ESV Flügelrad Nürnberg 2    TV 1861 Hersbruck   52:73
 
     # Remove the last row
-    row_len = df_Ergebnisse.__len__() - 1
-    df_drop_row = df_Ergebnisse.drop([row_len])
+    row_len = df_ergebnisse.__len__() - 1
+    df_drop_row = df_ergebnisse.drop([row_len])
 
     # Extract relevant columns and remove empty rows
     df_reduce = df_drop_row[["Heimmannschaft", "Gastmannschaft", "Endstand"]].dropna()
@@ -58,7 +58,7 @@ def read_table(url, table_file, html_file):
             table[home]["Wins"] += 1
             table[home]["Points"] += 2
             table[guest]["Losses"] += 1
-        elif points_home < points_guest:
+        else:
             table[guest]["Wins"] += 1
             table[guest]["Points"] += 2
             table[home]["Losses"] += 1
@@ -70,7 +70,6 @@ def read_table(url, table_file, html_file):
     df_table = df_table.sort_values(by=["Points", "Diff"], ascending=[False, False])
 
     # Display final table
-
     print(df_table.head())
 
     # Save final table as HTML
@@ -89,23 +88,23 @@ if __name__ == '__main__':
     league_stuff = "?liga_id="
     end_key = "&sessionkey=sport.dbb.liga.ErgebnisseViewPublic/index.jsp_"
 
-    leagues = [{
-        "name": "U10",
-        "league_id": "45122",
-        "table_file": "MFR_U10_mix_Kreisliga_Nord-2024.xls",
-    }, {
-        "name": "U12",
-        "league_id": "45119",
-        "table_file": "MFR_U12_mix_Kreisliga_Nord-2024.xls",
-    }, {
-        "name": "H3",
-        "league_id": "44652",
-        "table_file": "MFR_Bezirksklasse_Herren-2024.xls",
-    }]
+    leagues = \
+        [
+            {
+                "name": "U12",
+                "league_id": "51502",
+                "table_file": "MFR_U12_mix_Kreisliga_Nord-2025.xls"
+            },
+            {
+                "name": "H3",
+                "league_id": "48511",
+                "table_file": "MFR_Bezirksklasse_Herren-2025.xls"
+            }
+        ]
 
     for league in leagues:
         league_url = root_url + league_stuff + league["league_id"] + end_key
-        # print(url)
+        print(league_url)
         league_table_file = league["table_file"]
         league_html_file = f"Tabelle_{league["name"]}.html"
         read_table(league_url, league_table_file, league_html_file)
