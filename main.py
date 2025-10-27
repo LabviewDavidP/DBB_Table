@@ -1,4 +1,5 @@
 import urllib.request
+from tkinter.font import names
 from typing import Dict
 import pandas as pd
 
@@ -27,6 +28,8 @@ def read_table(url_tbl: str, table_file: str, html_file: str) -> None:
 
     # Initialize team stats dictionary
     teams = pd.unique(df[["Heimmannschaft", "Gastmannschaft"]].values.ravel("K"))
+    for team_str in teams:
+        team_str = str(team_str).replace("ü","ue").replace("ö","oe")
     stats: Dict[str, Dict[str, int]] = {
         team: {"Games": 0, "Wins": 0, "Losses": 0, "Points": 0,
                "Points Made": 0, "Points Get": 0, "Diff": 0}
@@ -75,6 +78,7 @@ if __name__ == '__main__':
     END_KEY = "&sessionkey=sport.dbb.liga.ErgebnisseViewPublic/index.jsp_"
     LEAGUES = [
         {"name": "U12", "league_id": "51502", "file": "MFR_U12_mix_Kreisliga_Nord-2025.xls"},
+        {"name": "U10", "league_id": "51505", "file": "MFR_U10_mix_Kreisliga_Nord-2025.xls"},
         {"name": "H3", "league_id": "48511", "file": "MFR_Bezirksklasse_Herren-2025.xls"},
     ]
 
