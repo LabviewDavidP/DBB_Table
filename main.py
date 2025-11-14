@@ -1,5 +1,4 @@
 import urllib.request
-from tkinter.font import names
 from typing import Dict
 import pandas as pd
 
@@ -28,11 +27,9 @@ def read_table(url_tbl: str, table_file: str, html_file: str) -> None:
 
     # Initialize team stats dictionary
     teams = pd.unique(df[["Heimmannschaft", "Gastmannschaft"]].values.ravel("K"))
-    for team_str in teams:
-        team_str = str(team_str).replace("ü","ue").replace("ö","oe")
+
     stats: Dict[str, Dict[str, int]] = {
-        team: {"Games": 0, "Wins": 0, "Losses": 0, "Points": 0,
-               "Points Made": 0, "Points Get": 0, "Diff": 0}
+        team: {"Games": 0, "Wins": 0, "Losses": 0, "Points": 0, "Points Made": 0, "Points Get": 0, "Diff": 0}
         for team in teams
     }
 
@@ -67,7 +64,7 @@ def read_table(url_tbl: str, table_file: str, html_file: str) -> None:
     )
 
     # Save to HTML (UTF-8 for better compatibility)
-    df_table.to_html(html_file, index=False, border=1, justify="center", encoding="utf-8")
+    df_table.to_html(html_file, index=False, border=1, justify="center", encoding="utf-16")
 
     print(f"✅ HTML table saved as '{html_file}'")
     print(df_table.head())
