@@ -1,13 +1,15 @@
 import urllib.request
+from pathlib import Path
 from typing import Dict
+
 import pandas as pd
 
 
-def read_table(url_tbl: str, table_file: str, html_file: str) -> None:
+def read_table(url_tbl: str, table_file: Path, html_file: Path) -> None:
     """Download, process, and generate a basketball league standings HTML table.
     :param url_tbl:    str: 'https://www.basketball-bund.net/servlet/...'
-    :param table_file: str: 'MFR_U12_mix_Kreisliga_Nord-2025.xls'
-    :param html_file:  str: 'Tabelle_U12.html'
+    :param table_file: Path: 'MFR_U12_mix_Kreisliga_Nord-2025.xls'
+    :param html_file:  Path: 'Tabelle_U12.html'
     """
 
     # Download the Excel file
@@ -71,15 +73,15 @@ def read_table(url_tbl: str, table_file: str, html_file: str) -> None:
 
 
 if __name__ == '__main__':
-    BASE_URL = "https://www.basketball-bund.net/servlet/sport.dbb.export.ExcelExportErgebnissePublic"
-    END_KEY = "&sessionkey=sport.dbb.liga.ErgebnisseViewPublic/index.jsp_"
-    LEAGUES = [
-        {"name": "U12", "league_id": "51502", "file": "MFR_U12_mix_Kreisliga_Nord-2025.xls"},
-        {"name": "U10", "league_id": "51505", "file": "MFR_U10_mix_Kreisliga_Nord-2025.xls"},
-        {"name": "H3", "league_id": "48511", "file": "MFR_Bezirksklasse_Herren-2025.xls"},
+    base_url: str = "https://www.basketball-bund.net/servlet/sport.dbb.export.ExcelExportErgebnissePublic"
+    end_key: str = "&sessionkey=sport.dbb.liga.ErgebnisseViewPublic/index.jsp_"
+    leagues = [
+        {"name": "U12", "league_id": 51502, "file": Path("MFR_U12_mix_Kreisliga_Nord-2025.xls")},
+        {"name": "U10", "league_id": 51505, "file": Path("MFR_U10_mix_Kreisliga_Nord-2025.xls")},
+        {"name": "H3", "league_id": 48511, "file": Path("MFR_Bezirksklasse_Herren-2025.xls")},
     ]
 
-    for league in LEAGUES:
-        url = f"{BASE_URL}?liga_id={league['league_id']}{END_KEY}"
+    for league in leagues:
+        url: str = f"{base_url}?liga_id={league['league_id']}{end_key}"
         print(f"Fetching {league['name']} data from {url}")
-        read_table(url_tbl=url, table_file=league["file"], html_file=f"Tabelle_{league['name']}.html")
+        read_table(url_tbl=url, table_file=league["file"], html_file=Path(f"Tabelle_{league['name']}.html"))
