@@ -119,21 +119,18 @@ if __name__ == "__main__":
         print(file.st_mode, file.st_size, file.st_atime, file.st_mtime, file.filename, sep="\t\t\t")
 
     # Upload files to SFTP location from local
-    html_file = "Tabelle_U10.html"
-    sftp.upload(".\\" + html_file, "/" + html_file)
-
-    html_file = "Tabelle_U12.html"
-    sftp.upload(".\\" + html_file, "/" + html_file)
-
-    html_file = "Tabelle_H3.html"
-    sftp.upload(".\\" + html_file, "/" + html_file)
+    html_files = ["Tabelle_U10.html", "Tabelle_U12.html", "Tabelle_H3.html"]
+    for html_file in html_files:
+        sftp.upload(".\\" + html_file, "/" + html_file)
 
     # Lists files of SFTP location after upload
     print(f"List of files at location {my_path}:")
     print([f for f in sftp.listdir(my_path)])
 
     # Download files from SFTP
-    sftp.download("/" + html_file, ".\\" + html_file + "_download")
+    html_files = ["Tabelle_U10.html", "Tabelle_U12.html", "Tabelle_H3.html"]
+    for html_file in html_files:
+        sftp.download("/" + html_file, ".\\" + html_file + "_download")
 
     # Disconnect from SFTP
     sftp.disconnect()

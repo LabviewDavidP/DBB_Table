@@ -30,8 +30,8 @@ def sftp_connect(hostname: str, port: int, username: str, password: str) -> None
 
     ssh_client.close()
 
-    delete_downloads = input("You want to keep the downloads? (y/n): ")
-    if delete_downloads == "n":
+    delete_downloads: str = input("You want to keep the downloads? (y/n): ")
+    if delete_downloads != "y":
         for html_file in html_files:
             os.remove(".\\" + html_file + "_download")
 
